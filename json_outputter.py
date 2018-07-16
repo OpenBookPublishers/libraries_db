@@ -50,7 +50,7 @@ def process_file(inputf, sheetname, institution_col_id, country_col_id, contact_
             "Contact" : sheet.cell(column=int(contact_col_id), row = int(row_id)).value,
             "IP-Range" : row_ids_ip_range[row_id],
             "Country-Code": countries.get(sheet.cell(column=int(country_col_id), row = int(row_id)).value),
-            "Institution-uuid" : uuid.uuid3(uuid.NAMESPACE_DNS,str(sheet.cell(column=int(institution_col_id), row = int(row_id)).value))
+            "Institution-uuid" : str(uuid.uuid4())
             }
         JSON_Objects.append(JSON_Object)
     print json.dumps(JSON_Objects)
