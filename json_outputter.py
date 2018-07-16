@@ -23,6 +23,14 @@ import sys
 from openpyxl import load_workbook
 import standardise_ip
 import json
+import pycountry
+import uuid
+
+# Generate dict of country names to country code
+countries = {}
+for country in pycountry.countries:
+    countries[country.name] = country.alpha2
+
 
 SHNAME  = "Sheet1"
 INS_COL = 1
@@ -40,7 +48,9 @@ def process_file(inputf, sheetname, institution_col_id, country_col_id, contact_
             "Institution" : sheet.cell(column=int(institution_col_id), row = int(row_id)).value,
             "Country" : sheet.cell(column=int(country_col_id), row = int(row_id)).value,
             "Contact" : sheet.cell(column=int(contact_col_id), row = int(row_id)).value,
-            "IP-Range" : row_ids_ip_range[row_id]
+            "IP-Range" : row_ids_ip_range[row_id],
+            "Country-Code": countries.get(sheet.cell(column=int(country_col_id), row = int(row_id)).value),
+            
             }
         JSON_Objects.append(JSON_Object)
     print json.dumps(JSON_Objects)
