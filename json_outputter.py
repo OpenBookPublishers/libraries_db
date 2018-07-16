@@ -29,7 +29,7 @@ import uuid
 # Generate dict of country names to country code
 countries = {}
 for country in pycountry.countries:
-    countries[country.name] = country.alpha2
+    countries[country.name] = country.alpha_2
 
 
 SHNAME  = "Sheet1"
